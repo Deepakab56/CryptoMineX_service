@@ -1,0 +1,600 @@
+{
+  "address": "9VWtCDH3iC58GHWhkEb6wNPas8sVprjjCBKmNbTW4Mbt",
+  "metadata": {
+    "name": "lottery",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "buy_ticket",
+      "discriminator": [11, 24, 17, 193, 168, 116, 164, 169],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108, 115]
+              }
+            ]
+          }
+        },
+        {
+          "name": "round_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [114, 111, 117, 110, 100]
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ticket_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [116, 105, 99, 107, 101, 116]
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              },
+              {
+                "kind": "arg",
+                "path": "ticket_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [117, 115, 101, 114, 95, 116, 105, 99, 107, 101, 116]
+              },
+              {
+                "kind": "account",
+                "path": "signer"
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              },
+              {
+                "kind": "arg",
+                "path": "ticket_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [116, 114, 101, 97, 115, 117, 114, 121]
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "ticket_no",
+          "type": "u8"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "close_account",
+      "discriminator": [125, 255, 149, 14, 110, 34, 72, 24],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108, 115]
+              }
+            ]
+          }
+        },
+        {
+          "name": "round_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [114, 111, 117, 110, 100]
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "commit_randomness",
+      "discriminator": [146, 52, 195, 220, 79, 30, 53, 26],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "round_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [114, 111, 117, 110, 100]
+              },
+              {
+                "kind": "account",
+                "path": "round_account.round_id",
+                "account": "Round"
+              }
+            ]
+          }
+        },
+        {
+          "name": "randomness_account_data"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "distribute_reward",
+      "discriminator": [135, 65, 136, 143, 108, 234, 198, 46],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108, 115]
+              }
+            ]
+          }
+        },
+        {
+          "name": "round_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [114, 111, 117, 110, 100]
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [116, 114, 101, 97, 115, 117, 114, 121]
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ticket_account",
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "admin",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "discriminator": [175, 175, 109, 31, 13, 152, 155, 237],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108, 115]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_round",
+      "discriminator": [43, 135, 19, 93, 14, 225, 131, 188],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108, 115]
+              }
+            ]
+          }
+        },
+        {
+          "name": "round_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [114, 111, 117, 110, 100]
+              },
+              {
+                "kind": "account",
+                "path": "global_account.round_id",
+                "account": "GlobalState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reveal_winner",
+      "discriminator": [234, 209, 237, 109, 16, 196, 64, 254],
+      "accounts": [
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "round_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [114, 111, 117, 110, 100]
+              },
+              {
+                "kind": "account",
+                "path": "round_account.round_id",
+                "account": "Round"
+              }
+            ]
+          }
+        },
+        {
+          "name": "randomness_account_data"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GlobalState",
+      "discriminator": [163, 46, 74, 168, 216, 123, 133, 98]
+    },
+    {
+      "name": "Round",
+      "discriminator": [87, 127, 165, 51, 73, 78, 116, 174]
+    },
+    {
+      "name": "Ticket",
+      "discriminator": [41, 228, 24, 165, 78, 90, 235, 200]
+    },
+    {
+      "name": "UserTicket",
+      "discriminator": [180, 163, 8, 176, 85, 62, 213, 128]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidAuthority",
+      "msg": "Signer does not have authority to perform this action"
+    },
+    {
+      "code": 6001,
+      "name": "RoundAlreadyActive",
+      "msg": "A round is already in progress"
+    },
+    {
+      "code": 6002,
+      "name": "AlreadyEnded",
+      "msg": "The round has already ended"
+    },
+    {
+      "code": 6003,
+      "name": "NotCompleteRound",
+      "msg": "The round has not yet completed"
+    },
+    {
+      "code": 6004,
+      "name": "RoundNotStarted",
+      "msg": "The round has not started yet"
+    },
+    {
+      "code": 6005,
+      "name": "RoundEnded",
+      "msg": "The round has ended and no longer accepts participation"
+    },
+    {
+      "code": 6006,
+      "name": "RoundNotEnded",
+      "msg": "The round has not ended yet; please wait until the round concludes"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidAmount",
+      "msg": "The provided amount is invalid or does not meet the minimum requirement"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidTicket",
+      "msg": "The specified ticket number is invalid for this round"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidRandomness",
+      "msg": "The randomness account provided is invalid or does not match the committed account"
+    },
+    {
+      "code": 6010,
+      "name": "RandomnessExpired",
+      "msg": "The randomness commitment has expired; please recommit before revealing"
+    },
+    {
+      "code": 6011,
+      "name": "RandomnessNotResolved",
+      "msg": "Randomness has not been resolved yet; please wait for the oracle to fulfill the request"
+    },
+    {
+      "code": 6012,
+      "name": "WinnerNotRevealed",
+      "msg": "The winner has not been revealed yet; please complete the reveal phase first"
+    },
+    {
+      "code": 6013,
+      "name": "TreasuryEmpty",
+      "msg": "The treasury account has insufficient funds to distribute rewards"
+    },
+    {
+      "code": 6014,
+      "name": "MissingWinnerAccount",
+      "msg": "One or more winner accounts are missing from the remaining accounts list"
+    },
+    {
+      "code": 6015,
+      "name": "Unauthorized",
+      "msg": "Unauthorized: the signer is not the program admin"
+    },
+    {
+      "code": 6016,
+      "name": "NotCloseAccount",
+      "msg": "All winner reward accounts must be closed before this operation can proceed"
+    }
+  ],
+  "types": [
+    {
+      "name": "GlobalState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "active_round",
+            "type": "pubkey"
+          },
+          {
+            "name": "round_id",
+            "type": "u64"
+          },
+          {
+            "name": "is_round_active",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Round",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "round_id",
+            "type": "u64"
+          },
+          {
+            "name": "start_time",
+            "type": "u64"
+          },
+          {
+            "name": "end_time",
+            "type": "u64"
+          },
+          {
+            "name": "winner_ticket",
+            "type": "u8"
+          },
+          {
+            "name": "total_amount",
+            "type": "u64"
+          },
+          {
+            "name": "users",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "ticket",
+            "type": "u64"
+          },
+          {
+            "name": "randomness_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "commit_slot",
+            "type": "u64"
+          },
+          {
+            "name": "is_distribted_reward",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ticket",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "users",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "total_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserTicket",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "round_id",
+            "type": "u64"
+          },
+          {
+            "name": "ticket_no",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}
